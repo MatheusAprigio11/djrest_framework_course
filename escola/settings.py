@@ -8,6 +8,10 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
+
+aprigio token: 6775129258ca19e1b24f3f459713cd4ea93a0f20
+prijas token: 986a122629dde1d6dd72a59b85f896eb053b5f53
+
 """
 
 from pathlib import Path
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
 
     'cursos',
     
@@ -135,9 +140,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' :(
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':(
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2
 }
